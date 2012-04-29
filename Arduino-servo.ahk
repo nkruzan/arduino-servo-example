@@ -20,9 +20,7 @@ ARDUINO_Stop     = 1
 ; setup arduino serial communication
 arduino_setup(start_polling_serial:=false)
 ; *****************GUI CODE***************
-; add first button
 Gui, Add, Slider, vServoSlider1 gServoSlider1 range0-180 AltSubmit, 90
-Gui, Add, Slider, vServoSlider1 gServoSlider2 range0-180 AltSubmit, 90
 Gui, Add, Text,, Current Servo Position (as reported by Arduino):
 Gui, Add, Text, vPosition,**NO DATA RECEIVED YET**
 
@@ -30,7 +28,6 @@ Gui, Add, Text, vPosition,**NO DATA RECEIVED YET**
 Gui, Show
 ; *****************************************
 Gosub, ServoSlider1
-Gosub, ServoSlider2
 return
 ; ******button action code ******
 
@@ -38,11 +35,6 @@ ServoSlider1:
 	Gui, Submit, NoHide
 	UpdateSliderToolTip(ServoSlider1)
 	GuiControl,,Position, % arduino_send(ServoSlider1)
-return
-ServoSlider2:
-	Gui, Submit, NoHide
-	UpdateSliderToolTip(ServoSlider2)
-	GuiControl,,Position, % arduino_send(ServoSlider2)
 return
 
 UpdateSliderToolTip(val){
